@@ -16,8 +16,7 @@ module.exports = {
       "error",
       {
         ignoreComments: true,
-      },
-      {
+        ignoreTrailingComments: true,
         ignoreUrls: true,
       },
     ],

@@ -1,7 +1,6 @@
 {
   "name": "js2",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -58,6 +57,7 @@
   },
   "dependencies": {
     "jest-environment-jsdom": "^28.1.2",
+    "jest-fetch-mock": "^3.0.3",
     "node-fetch": "^3.2.6"
   }
 }

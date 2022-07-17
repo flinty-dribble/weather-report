@@ -1,19 +1,22 @@
-import fetch from "node-fetch";
 import { getWeather } from "./weather";
 
-describe("weather report", async () => {
-  it("user`s sity", async () => {
-    const geojs = await fetch("https://get.geojs.io/v1/ip/geo.json");
-    const pos = await geojs.json();
+beforeEach(() => {
+  fetch.resetMocks();
+});
 
-    const city = document.querySelector(".city");
-    const temp = document.querySelector(".temp");
-    const icon = document.querySelector("img");
+describe("weather report", () => {
+  it("user`s weather", async () => {
+    fetch.mockResponses(
+      [JSON.stringify({ latitude: 39 }), { status: 200 }],
+      [JSON.stringify({ main: { temp: 290 } }), { status: 200 }]
+    );
 
-    getWeather(pos);
-
-    expect(city.innerHTML).toBe("city: Moscow");
-    expect(temp.innerHTML).toBe("temperature: 22");
-    expect(icon.src).toBe("http://openweathermap.org/img/wn/03d@2x.png");
+    const res = await getWeather();
+    expect(res).toEqual(290);
+    // expect(document.querySelector(".city").innerHTML).toBe("city: Moscow");
+    // expect(document.querySelector(".temp").innerHTML).toBe("temperature: 20");
+    // expect(document.querySelector("img").src).toBe(
+    //  "http://openweathermap.org/img/wn/03d@2x.png"
+    // );
   });
 });
