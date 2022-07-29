@@ -6,10 +6,13 @@ const path = require("path");
 const mode = process.env.NODE_ENV;
 
 module.exports = {
-  entry: "./src/weather.js",
+  entry: {
+    slide: "./src/weather.js",
+    style: "./src/style.js",
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].js",
     clean: true,
     environment: {
       arrowFunction: false,
