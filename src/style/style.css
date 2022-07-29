@@ -1,7 +1,4 @@
-#map {
-  width: 400px;
-  height: 400px;
-
+.map {
   position: absolute;
   top: 50%;
   left: 50%;

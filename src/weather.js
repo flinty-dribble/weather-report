@@ -14,34 +14,23 @@ export async function getWeather(el) {
     el.append(button);
     button.innerHTML = "click";
 
-    const map = document.createElement("div");
-    el.append(map);
-    map.id = "map";
-
     const city = document.createElement("p");
     const temp = document.createElement("p");
     const icon = document.createElement("img");
+    const map = document.createElement("img");
     city.classList.add("city");
     temp.classList.add("temp");
+    icon.classList.add("icon");
+    map.classList.add("map");
     el.append(city);
     el.append(temp);
     el.append(icon);
+    el.append(map);
 
     city.innerHTML = `city: ${text.name}`;
     temp.innerHTML = `temperature: ${Math.round(text.main.temp - 273.15)}`;
     icon.src = `http://openweathermap.org/img/wn/${text.weather[0].icon}@2x.png`;
-
-    const createMap = () => {
-      /* global ymaps */
-      /* eslint no-undef: "error" */
-
-      const yandex = new ymaps.Map("map", {
-        center: [pos.latitude, pos.longitude],
-        zoom: 10,
-      });
-      return yandex;
-    };
-    ymaps.ready(createMap);
+    map.src = `https://static-maps.yandex.ru/1.x/?ll=${text.coord.lon},${text.coord.lat}&size=450,450&z=11&l=map`;
 
     button.onclick = async () => {
       try {
@@ -52,6 +41,7 @@ export async function getWeather(el) {
         city.innerHTML = `city: ${res.name}`;
         temp.innerHTML = `temperature: ${Math.round(res.main.temp - 273.15)}`;
         icon.src = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+        map.src = `https://static-maps.yandex.ru/1.x/?ll=${res.coord.lon},${res.coord.lat}&size=450,450&z=11&l=map`;
 
         const town = document.createElement("p");
         town.classList.add("history");
@@ -76,6 +66,7 @@ export async function getWeather(el) {
             result.main.temp - 273.15
           )}`;
           icon.src = `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+          map.src = `https://static-maps.yandex.ru/1.x/?ll=${result.coord.lon},${result.coord.lat}&size=450,450&z=11&l=map`;
 
           return res;
         };

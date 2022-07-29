@@ -15,6 +15,7 @@ describe("weather report", () => {
             name: "Moscow",
             main: { temp: 291.15 },
             weather: [{ icon: "03d" }],
+            coord: { lon: 37.91, lat: 55.34 },
           }),
       })
     )
@@ -25,6 +26,7 @@ describe("weather report", () => {
             name: "London",
             main: { temp: 295.15 },
             weather: [{ icon: "03d" }],
+            coord: { lon: 37.91, lat: 55.34 },
           }),
       })
     )
@@ -35,6 +37,7 @@ describe("weather report", () => {
             name: "Tokyo",
             main: { temp: 298.15 },
             weather: [{ icon: "02d" }],
+            coord: { lon: 37.91, lat: 55.34 },
           }),
       })
     );
@@ -46,8 +49,11 @@ describe("weather report", () => {
 
     const asyncMock = jest
       .fn()
-      .mockResolvedValue(
+      .mockResolvedValueOnce(
         `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+      )
+      .mockResolvedValueOnce(
+        `https://static-maps.yandex.ru/1.x/?ll=${res.coord.lon},${res.coord.lat}&size=450,450&z=11&l=map`
       );
 
     expect(el.querySelector(".city").innerHTML).toBe(`city: ${res.name}`);
@@ -66,8 +72,11 @@ describe("weather report", () => {
 
     const asyncMock = jest
       .fn()
-      .mockResolvedValue(
+      .mockResolvedValueOnce(
         `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+      )
+      .mockResolvedValueOnce(
+        `https://static-maps.yandex.ru/1.x/?ll=${res.coord.lon},${res.coord.lat}&size=450,450&z=11&l=map`
       );
 
     expect(el.querySelector(".city").innerHTML).toBe(`city: ${res.name}`);
@@ -105,6 +114,7 @@ describe("weather report", () => {
                 name: "Moscow",
                 main: { temp: 291.15 },
                 weather: [{ icon: "03d" }],
+                coord: { lon: 37.91, lat: 55.34 },
               }),
           })
         )
@@ -115,6 +125,7 @@ describe("weather report", () => {
                 name: "London",
                 main: { temp: 295.15 },
                 weather: [{ icon: "03d" }],
+                coord: { lon: 37.91, lat: 55.34 },
               }),
           })
         )
@@ -125,6 +136,7 @@ describe("weather report", () => {
                 name: "Tokyo",
                 main: { temp: 298.15 },
                 weather: [{ icon: "02d" }],
+                coord: { lon: 37.91, lat: 55.34 },
               }),
           })
         );
@@ -158,6 +170,7 @@ describe("weather report", () => {
               name: "Moscow",
               main: { temp: 291.15 },
               weather: [{ icon: "03d" }],
+              coord: { lon: 37.91, lat: 55.34 },
             }),
         })
       )
@@ -168,6 +181,7 @@ describe("weather report", () => {
               name: "London",
               main: { temp: 295.15 },
               weather: [{ icon: "03d" }],
+              coord: { lon: 37.91, lat: 55.34 },
             }),
         })
       )
@@ -178,6 +192,7 @@ describe("weather report", () => {
               name: "Tokyo",
               main: { temp: 298.15 },
               weather: [{ icon: "02d" }],
+              coord: { lon: 37.91, lat: 55.34 },
             }),
         })
       );
@@ -188,8 +203,11 @@ describe("weather report", () => {
 
     const asyncMock = jest
       .fn()
-      .mockResolvedValue(
+      .mockResolvedValueOnce(
         `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+      )
+      .mockResolvedValueOnce(
+        `https://static-maps.yandex.ru/1.x/?ll=${res.coord.lon},${res.coord.lat}&size=450,450&z=11&l=map`
       );
 
     expect(el.querySelector(".city").innerHTML).toBe(`city: ${res.name}`);
