@@ -1,0 +1,1 @@
+{"version":3,"file":"style.css","mappings":"AAAA,KAGE,QAAS,CAFT,iBAAkB,CAClB,OAEF","sources":["webpack://js2/./src/style/style.css"],"sourcesContent":[".map {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n}\n"],"names":[],"sourceRoot":""}
