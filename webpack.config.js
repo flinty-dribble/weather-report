@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -7,7 +8,8 @@ const mode = process.env.NODE_ENV;
 
 module.exports = {
   entry: {
-    slide: "./src/weather.js",
+    weather: "./src/weather.ts",
+    weatherId: "./src/weatherId.ts",
     style: "./src/style.js",
   },
   output: {
@@ -23,6 +25,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "src/index.html",
+      excludeChunks: ["weatherId"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "cityId.html",
+      template: "src/cityId.html",
+      excludeChunks: ["weather"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "interestingFacts.html",
+      template: "src/interestingFacts.html",
+      excludeChunks: ["weather", "weatherId"],
     }),
     new MiniCssExtractPlugin(),
   ],
@@ -32,17 +45,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules)/,
+        test: /\.tsx?$/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
         },
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   devServer: {
     compress: true,
