@@ -110,8 +110,7 @@ export async function getWeatherByCity(
 
 export async function getWeather(el: HTMLDivElement) {
   try {
-     //localStorage.clear()
-
+    localStorage.clear()
     const geojs = await fetch("https://get.geojs.io/v1/ip/geo.json");
     const pos = await geojs.json();
     const response = await fetch(
